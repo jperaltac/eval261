@@ -9,6 +9,7 @@ Mejoras principales respecto a la versión inicial:
 - Panel de resumen para apoyar la gestión de evaluaciones.
 """
 
+import argparse
 import datetime
 import json
 import os
@@ -38,17 +39,27 @@ class EvaluationApp:
             return {key: self._normalize_structure(item) for key, item in value.items()}
         return value
 
-    def __init__(self, master: tk.Tk, data_dir: str = "."):
+    def __init__(
+        self,
+        master: tk.Tk,
+        data_dir: str = ".",
+        rubric_path: str | None = None,
+        students_path: str | None = None,
+        evaluations_dir: str | None = None,
+    ):
         self.master = master
         self.master.title("Evaluación de Estudiantes")
         self.master.geometry("1360x860")
-        self.data_dir = data_dir
+        self.data_dir = os.path.abspath(data_dir)
 
-        rubric_path = os.path.join(data_dir, "rubric.json")
-        students_path = os.path.join(data_dir, "students.json")
+        rubric_path = rubric_path or os.path.join(self.data_dir, "rubric.json")
+        students_path = students_path or os.path.join(self.data_dir, "students.json")
         if not os.path.isfile(rubric_path) or not os.path.isfile(students_path):
             messagebox.showerror(
-                "Error", "No se encontraron los archivos rubric.json o students.json en " + data_dir
+                "Error",
+                "No se encontraron los archivos de entrada:\n"
+                f"- Rúbrica: {rubric_path}\n"
+                f"- Estudiantes: {students_path}",
             )
             self.master.destroy()
             return
@@ -59,7 +70,7 @@ class EvaluationApp:
         with open(students_path, "r", encoding="utf-8") as f:
             self.students = self._normalize_structure(json.load(f))
 
-        self.evals_dir = os.path.join(data_dir, "evaluations")
+        self.evals_dir = evaluations_dir or os.path.join(self.data_dir, "evaluations")
         os.makedirs(self.evals_dir, exist_ok=True)
 
         # Valores de logro para cálculo ponderado
@@ -650,9 +661,44 @@ class EvaluationApp:
 
 
 def main():
+    parser = argparse.ArgumentParser(
+        description="Aplicación de evaluación de estudiantes basada en rúbrica."
+    )
+    parser.add_argument(
+        "--data-dir",
+        default=".",
+        help="Carpeta base para buscar rubric.json, students.json y guardar evaluations/ (default: directorio actual).",
+    )
+    parser.add_argument(
+        "--rubric-file",
+        default=None,
+        help="Ruta explícita del archivo de rúbrica (si no se indica, usa <data-dir>/rubric.json).",
+    )
+    parser.add_argument(
+        "--students-file",
+        default=None,
+        help="Ruta explícita del archivo de estudiantes (si no se indica, usa <data-dir>/students.json).",
+    )
+    parser.add_argument(
+        "--evaluations-dir",
+        default=None,
+        help="Carpeta de salida para evaluaciones (si no se indica, usa <data-dir>/evaluations).",
+    )
+    args = parser.parse_args()
+
+    data_dir = os.path.abspath(args.data_dir)
+    rubric_path = os.path.abspath(args.rubric_file) if args.rubric_file else None
+    students_path = os.path.abspath(args.students_file) if args.students_file else None
+    evaluations_dir = os.path.abspath(args.evaluations_dir) if args.evaluations_dir else None
+
     root = tk.Tk()
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    EvaluationApp(root, data_dir=script_dir)
+    EvaluationApp(
+        root,
+        data_dir=data_dir,
+        rubric_path=rubric_path,
+        students_path=students_path,
+        evaluations_dir=evaluations_dir,
+    )
     root.mainloop()
 
 
