@@ -13,6 +13,7 @@ import datetime
 import json
 import os
 import tkinter as tk
+import unicodedata
 from tkinter import messagebox, ttk
 
 
@@ -20,6 +21,21 @@ class EvaluationApp:
     """Main application class for student evaluation."""
 
     LEVEL_ORDER = ("DD", "DS", "DI", "SD")
+
+    @staticmethod
+    def _normalize_text(value: str) -> str:
+        """Normaliza textos para evitar inconsistencias de acentos Unicode."""
+        return unicodedata.normalize("NFC", value).strip()
+
+    def _normalize_structure(self, value):
+        """Normaliza strings dentro de listas/diccionarios de forma recursiva."""
+        if isinstance(value, str):
+            return self._normalize_text(value)
+        if isinstance(value, list):
+            return [self._normalize_structure(item) for item in value]
+        if isinstance(value, dict):
+            return {key: self._normalize_structure(item) for key, item in value.items()}
+        return value
 
     def __init__(self, master: tk.Tk, data_dir: str = "."):
         self.master = master
@@ -37,10 +53,10 @@ class EvaluationApp:
             return
 
         with open(rubric_path, "r", encoding="utf-8") as f:
-            self.rubric = json.load(f)
+            self.rubric = self._normalize_structure(json.load(f))
 
         with open(students_path, "r", encoding="utf-8") as f:
-            self.students = json.load(f)
+            self.students = self._normalize_structure(json.load(f))
 
         self.evals_dir = os.path.join(data_dir, "evaluations")
         os.makedirs(self.evals_dir, exist_ok=True)
@@ -81,7 +97,7 @@ class EvaluationApp:
             if os.path.isfile(eval_path):
                 try:
                     with open(eval_path, "r", encoding="utf-8") as f:
-                        index[student_id] = json.load(f)
+                        index[student_id] = self._normalize_structure(json.load(f))
                 except (json.JSONDecodeError, OSError):
                     # Si hay un archivo corrupto, se ignora para no romper la interfaz
                     continue
@@ -335,10 +351,13 @@ class EvaluationApp:
         if os.path.isfile(eval_path):
             try:
                 with open(eval_path, "r", encoding="utf-8") as f:
-                    data = json.load(f)
-                selections = {e.get("criterion"): e.get("level") for e in data.get("evaluations", [])}
+                    data = self._normalize_structure(json.load(f))
+                selections = {
+                    self._normalize_text(e.get("criterion", "")): e.get("level")
+                    for e in data.get("evaluations", [])
+                }
                 for entry in self.criterion_widgets:
-                    criterion = entry["item"]["criterion"]
+                    criterion = self._normalize_text(entry["item"]["criterion"])
                     code = selections.get(criterion, "")
                     if code in self.level_labels:
                         entry["var"].set(self.level_labels[code])
