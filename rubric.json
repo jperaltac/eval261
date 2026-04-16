@@ -55,39 +55,39 @@
     "ra_id": "A2-RAPI1",
     "competency": "COMPETENCIAS GENERALES",
     "ra_description": "Integra conceptos fundamentales de matemáticas y física en la solución de problemas propios del nivel de formación en ciencias exactas.",
-    "criterion": "BÚSQUEDA Y ANÁLISIS DE BIBLIOGRAFÍA . PLANTEAMIENTO DE HIPOTESIS",
+    "criterion": "BÚSQUEDA Y ANÁLISIS DE BIBLIOGRAFÍA . PLANTEAMIENTO DE HIPOTESIS",
     "weight": 0.1,
     "levels": {
-      "DD": "Realiza una búsqueda bibliográfica adecuada y extrae las principales conclusiones de los trabajos relevantes al tema. Plantea hipótesis y objetivos bien expresadas y relevantes",
-      "DS": "Realiza una búsqueda bibliográfica adecuada y extrae algunas conclusiones relevantes al tema. Plantea hipótesis y objetivos relevantes en una forma que podría ser mejorable",
-      "DI": "Extrae conclusiones de la literatura, pero son incompletas o poco relevantes  para su trabajo. Plantea hipótesis y Objetivos deficientemente expresadas y/o poco relevantes .",
-      "SD": "No extrae conclusiones. No plantea hipótesis y objetivos"
+      "DD": "Realiza una búsqueda bibliográfica adecuada y extrae las principales conclusiones de los trabajos relevantes al tema. Plantea hipótesis y objetivos bien expresadas y relevantes",
+      "DS": "Realiza una búsqueda bibliográfica adecuada y extrae algunas conclusiones relevantes al tema. Plantea hipótesis y objetivos relevantes en una forma que podría ser mejorable",
+      "DI": "Extrae conclusiones de la literatura, pero son incompletas o poco relevantes  para su trabajo. Plantea hipótesis y Objetivos deficientemente expresadas y/o poco relevantes .",
+      "SD": "No extrae conclusiones. No plantea hipótesis y objetivos"
     }
   },
   {
     "ra_id": "A2-RAPI2",
     "competency": "",
     "ra_description": "Soluciona problemas físicos teóricos y aplicados usando conceptos fundamentales propios de la Mecánica Clásica, Electrodinámica, Termodinámica y Mecánica Cuántica, de complejidad acorde al nivel de formación.",
-    "criterion": "DISEÑO Y PUESTA EN MARCHA DE LA INVESTIGACIÓN",
+    "criterion": "DISEÑO Y PUESTA EN MARCHA DE LA INVESTIGACIÓN",
     "weight": 0.1,
     "levels": {
-      "DD": "Diseña y pone en marcha autónomamente una investigación en una forma particularmente eficiente.",
-      "DS": "Diseña y pone en marcha autónomamente una investigación correcta",
-      "DI": "Diseña y pone en marcha la investigación autónomamente pero de manera poco adecuada",
-      "SD": "No diseña adecuadamente la investigación, y no es capaz de ponerla en marcha, desarrollar y explicar con claridad"
+      "DD": "Diseña y pone en marcha autónomamente una investigación en una forma particularmente eficiente.",
+      "DS": "Diseña y pone en marcha autónomamente una investigación correcta",
+      "DI": "Diseña y pone en marcha la investigación autónomamente pero de manera poco adecuada",
+      "SD": "No diseña adecuadamente la investigación, y no es capaz de ponerla en marcha, desarrollar y explicar con claridad"
     }
   },
   {
     "ra_id": "A3-RAPI2",
     "competency": "",
     "ra_description": "Comunica los resultados de una investigación científica coherente con la disciplina y el nivel de formación y su asociación con fenómenos físicos.",
-    "criterion": "DISCUSIÓN DE RESULTADOS RESULTADOS Y CONCLUSIONES DEL TRABAJO",
+    "criterion": "DISCUSIÓN DE RESULTADOS RESULTADOS Y CONCLUSIONES DEL TRABAJO",
     "weight": 0.1,
     "levels": {
-      "DD": "Realiza una discusión adecuada y relevante",
-      "DS": "Realiza una discusión adecuada dejando algunos puntos incompletos",
+      "DD": "Realiza una discusión adecuada y relevante",
+      "DS": "Realiza una discusión adecuada dejando algunos puntos incompletos",
       "DI": "Discute los resultados de forma superficial",
-      "SD": "No hace una discusión de los resultados"
+      "SD": "No hace una discusión de los resultados"
     }
   },
   {
