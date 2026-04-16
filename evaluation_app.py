@@ -21,6 +21,7 @@ class EvaluationApp:
     """Main application class for student evaluation."""
 
     LEVEL_ORDER = ("DD", "DS", "DI", "SD")
+    SECTION_ORDER = ("ESCRITO", "COMPETENCIAS GENERALES", "CÓDIGO COMPUTACIONAL")
 
     @staticmethod
     def _normalize_text(value: str) -> str:
@@ -226,31 +227,62 @@ class EvaluationApp:
 
         self._build_rubric_tabs()
 
+    @staticmethod
+    def _axis_from_ra_id(ra_id: str) -> str:
+        """Obtiene AX (ámbito) desde identificador de RA."""
+        return ra_id.split("-", maxsplit=1)[0] if "-" in ra_id else ""
+
+    def _section_for_item(self, item: dict) -> str:
+        """Define sección principal visible en pestañas."""
+        section = item.get("section") or item.get("competency")
+        section = self._normalize_text(section or "")
+        if section:
+            return section
+        return "SIN SECCIÓN"
+
     def _build_rubric_tabs(self) -> None:
-        """Crea pestañas por RA y filas de criterios con selección tipo casilla."""
+        """Crea pestañas por sección y muestra RA/AX como referencia secundaria."""
         grouped = {}
         for item in self.rubric:
-            grouped.setdefault(item["ra_id"], []).append(item)
+            section = self._section_for_item(item)
+            grouped.setdefault(section, []).append(item)
 
-        for ra_id, items in grouped.items():
+        ordered_sections = [
+            section for section in self.SECTION_ORDER if section in grouped
+        ] + [section for section in grouped if section not in self.SECTION_ORDER]
+
+        for section in ordered_sections:
+            items = grouped[section]
             frame = ttk.Frame(self.notebook, padding=8)
             frame.columnconfigure(0, weight=3)
             frame.columnconfigure(1, weight=1)
             frame.columnconfigure(2, weight=3)
 
-            competency = items[0].get("competency", "") or "Sin categoría"
-            self.notebook.add(frame, text=f"{ra_id}")
+            self.notebook.add(frame, text=section)
 
-            title = ttk.Label(frame, text=f"{ra_id} · {competency}", font=("TkDefaultFont", 10, "bold"))
+            title = ttk.Label(frame, text=section, font=("TkDefaultFont", 10, "bold"))
             title.grid(row=0, column=0, columnspan=3, sticky="w", pady=(0, 4))
 
-            ra_description = items[0].get("ra_description", "")
-            ttk.Label(frame, text=ra_description, wraplength=740, foreground="#444").grid(
+            ra_refs = []
+            for item in items:
+                ra_ref = f"{item['ra_id']} ({self._axis_from_ra_id(item['ra_id'])})"
+                if ra_ref not in ra_refs:
+                    ra_refs.append(ra_ref)
+            ttk.Label(
+                frame,
+                text="RA asociados: " + ", ".join(ra_refs),
+                wraplength=740,
+                foreground="#444",
+            ).grid(
                 row=1, column=0, columnspan=3, sticky="w", pady=(0, 10)
             )
 
             for idx, item in enumerate(items, start=2):
-                row_frame = ttk.LabelFrame(frame, text=item["criterion"], padding=6)
+                row_frame = ttk.LabelFrame(
+                    frame,
+                    text=f"{item['criterion']} · {item['ra_id']}",
+                    padding=6,
+                )
                 row_frame.grid(row=idx, column=0, columnspan=3, sticky="ew", pady=(0, 6))
                 row_frame.columnconfigure(1, weight=1)
 
@@ -380,8 +412,11 @@ class EvaluationApp:
         """Muestra descripción detallada de niveles para un criterio."""
         selected = self._selected_code(var)
         lines = [
+            f"Sección: {self._section_for_item(item)}",
+            f"AX: {self._axis_from_ra_id(item['ra_id'])}",
             f"RA: {item['ra_id']}",
             f"Criterio: {item['criterion']}",
+            f"Descripción RA: {item.get('ra_description', '')}",
             f"Ponderación: {item['weight']:.2f}",
             "",
             "Niveles de logro:",

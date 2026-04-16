@@ -10,7 +10,8 @@
       "DS": "Es legible. \n-Escribe las palabras correctamente.\n-En ocaciones separa las palabras.\n-Hay separación correcta de palabras.\n-Salvo pequeños detalles, las palabras son claras.",
       "DI": "Es medianamente legible.\n- Algunos errores de sustitución, omisión o adición de letras o sílabas.\n- No separa algunas palabras. \n- Presenta algunos errores en la separación de palabras . \n-  La gran mayoría de las oraciones son comprensibles.",
       "SD": "No se puede leer.\n- Escritura prealfabética (letras o sílabas que no forman palabras). \n- No existe separación entre palabras o es incorrecta. \n- Oraciones incomprensibles."
-    }
+    },
+    "section": "ESCRITO"
   },
   {
     "ra_id": "A1-RAPI1",
@@ -23,7 +24,8 @@
       "DS": "Cumple con su propósito comunicativo.\n-Se comprenden las ideas expuestas en el texto.\n- Está organizado, salvo pequeñas salvedades, y cumple la intención del tipo de texto requerido.",
       "DI": "Cumple     parcialmente     con     su     propósito comunicativo. \n-Se comprende parcialmente el mensaje a transmitir, con algunas ideas incompletas o mezcladas.\n- Falta algún componente (ej. título, resumen, conclusiones, etc.).",
       "SD": "No      cumple      con      su      propósito comunicativo. \n- No hay claridad en el mensaje que se espera transmitir.  Pierde secuencia o cambia de tema. \n-No  presenta  organización correspondiente a l tipo de texto requerido."
-    }
+    },
+    "section": "ESCRITO"
   },
   {
     "ra_id": "A1-RAPI1",
@@ -36,7 +38,8 @@
       "DS": "Amplio uso de vocabulario. \n- El vocabulario es rico y variado.",
       "DI": "Uso limitado del vocabulario. \n- Uso limitado o repetitivo de palabras. \n- Algunas palabras no corresponden a la situación que se intenta comunicar.",
       "SD": "Vocabulario escaso o no pertinente. \n-Producción de texto reducida.\n-Las  palabras  no  corresponden  a  la situación comunicativa ."
-    }
+    },
+    "section": "ESCRITO"
   },
   {
     "ra_id": "A1-RAPI1",
@@ -49,7 +52,8 @@
       "DS": "Uso adecuado de las reglas ortográficas.,\n- Reglas bien utilizadas, salvo un pequeño número de errores. Bien utilziada la puntuación, salvo pocos errores\n-Uso de mayúsculas.",
       "DI": "Uso de algunas reglas ortográficas. \n-Dos o tres errores u omisiones, en palabras poco comunes.\n- Algunos errores en la acentuación de palabras comunes. Algunos errores de puntuación",
       "SD": "No respeta las reglas ortográficas. \n-No distingue uso de mayúsculas. \n-Errores ortográficos en las palabras comunes. Uso incorrecto de puntuación, de forma frecuente."
-    }
+    },
+    "section": "ESCRITO"
   },
   {
     "ra_id": "A2-RAPI1",
@@ -62,11 +66,12 @@
       "DS": "Realiza una búsqueda bibliográfica adecuada y extrae algunas conclusiones relevantes al tema. Plantea hipótesis y objetivos relevantes en una forma que podría ser mejorable",
       "DI": "Extrae conclusiones de la literatura, pero son incompletas o poco relevantes  para su trabajo. Plantea hipótesis y Objetivos deficientemente expresadas y/o poco relevantes .",
       "SD": "No extrae conclusiones. No plantea hipótesis y objetivos"
-    }
+    },
+    "section": "COMPETENCIAS GENERALES"
   },
   {
     "ra_id": "A2-RAPI2",
-    "competency": "",
+    "competency": "COMPETENCIAS GENERALES",
     "ra_description": "Soluciona problemas físicos teóricos y aplicados usando conceptos fundamentales propios de la Mecánica Clásica, Electrodinámica, Termodinámica y Mecánica Cuántica, de complejidad acorde al nivel de formación.",
     "criterion": "DISEÑO Y PUESTA EN MARCHA DE LA INVESTIGACIÓN",
     "weight": 0.1,
@@ -75,11 +80,12 @@
       "DS": "Diseña y pone en marcha autónomamente una investigación correcta",
       "DI": "Diseña y pone en marcha la investigación autónomamente pero de manera poco adecuada",
       "SD": "No diseña adecuadamente la investigación, y no es capaz de ponerla en marcha, desarrollar y explicar con claridad"
-    }
+    },
+    "section": "COMPETENCIAS GENERALES"
   },
   {
     "ra_id": "A3-RAPI2",
-    "competency": "",
+    "competency": "COMPETENCIAS GENERALES",
     "ra_description": "Comunica los resultados de una investigación científica coherente con la disciplina y el nivel de formación y su asociación con fenómenos físicos.",
     "criterion": "DISCUSIÓN DE RESULTADOS RESULTADOS Y CONCLUSIONES DEL TRABAJO",
     "weight": 0.1,
@@ -88,7 +94,8 @@
       "DS": "Realiza una discusión adecuada dejando algunos puntos incompletos",
       "DI": "Discute los resultados de forma superficial",
       "SD": "No hace una discusión de los resultados"
-    }
+    },
+    "section": "COMPETENCIAS GENERALES"
   },
   {
     "ra_id": "A2-RAPI3",
@@ -101,7 +108,8 @@
       "DS": "Diseña un código utilizable, pero falto de funcionalidad y uso de librerias.",
       "DI": "Diseña un código parcialmente utilizable, que no cumple su labor para el desarrollo de la investigación.",
       "SD": "No diseña un código."
-    }
+    },
+    "section": "CÓDIGO COMPUTACIONAL"
   },
   {
     "ra_id": "A2-RAPI3",
@@ -114,11 +122,12 @@
       "DS": "El código presenta una documentación suficiente, con secciones claves sin documentar.",
       "DI": "El código posee una documentación incompleta",
       "SD": "El código no posee documentación ni comentarios."
-    }
+    },
+    "section": "CÓDIGO COMPUTACIONAL"
   },
   {
     "ra_id": "A2-RAPI2",
-    "competency": "",
+    "competency": "CÓDIGO COMPUTACIONAL",
     "ra_description": "Soluciona problemas físicos teóricos y aplicados usando conceptos fundamentales propios de la Mecánica Clásica, Electrodinámica, Termodinámica y Mecánica Cuántica, de complejidad acorde al nivel de formación.",
     "criterion": "FUNCIONAMIENTO DEL CÓDIGO",
     "weight": 0.2,
@@ -127,6 +136,7 @@
       "DS": "El código cumple sus requerimientos de forma parcial, requiere modificaciones profundas para cada uso.",
       "DI": "El código cumple muy pocas de las funciones o requerimientos solicitados en su diseño.",
       "SD": "El código no funciona."
-    }
+    },
+    "section": "CÓDIGO COMPUTACIONAL"
   }
 ]
