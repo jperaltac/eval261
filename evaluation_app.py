@@ -85,6 +85,8 @@ class EvaluationApp:
             "SD": "SD - Sin Dominio",
         }
         self.label_to_code = {v: k for k, v in self.level_labels.items()}
+        self.bulk_criterion_var = tk.StringVar(value="")
+        self.bulk_level_var = tk.StringVar(value="")
 
         self._build_ui()
         self._refresh_student_table()
@@ -148,7 +150,7 @@ class EvaluationApp:
             columns=columns,
             show="headings",
             height=28,
-            selectmode="browse",
+            selectmode="extended",
         )
         self.student_tree.heading("student", text="Estudiante")
         self.student_tree.heading("state", text="Estado")
@@ -169,6 +171,34 @@ class EvaluationApp:
         stats_frame.grid(row=3, column=0, sticky="ew", pady=(8, 0))
         self.summary_label = ttk.Label(stats_frame, text="Evaluados: 0 / 0")
         self.summary_label.pack(anchor="w", padx=8, pady=6)
+
+        bulk_frame = ttk.LabelFrame(left, text="Aplicación masiva (seleccionados)")
+        bulk_frame.grid(row=4, column=0, sticky="ew", pady=(8, 0))
+        bulk_frame.columnconfigure(0, weight=1)
+
+        criterion_values = [item["criterion"] for item in self.rubric]
+        ttk.Label(bulk_frame, text="Criterio").grid(row=0, column=0, sticky="w", padx=8, pady=(8, 2))
+        bulk_criterion_combo = ttk.Combobox(
+            bulk_frame,
+            textvariable=self.bulk_criterion_var,
+            state="readonly",
+            values=criterion_values,
+        )
+        bulk_criterion_combo.grid(row=1, column=0, sticky="ew", padx=8)
+
+        ttk.Label(bulk_frame, text="Nivel").grid(row=2, column=0, sticky="w", padx=8, pady=(8, 2))
+        bulk_level_combo = ttk.Combobox(
+            bulk_frame,
+            textvariable=self.bulk_level_var,
+            state="readonly",
+            values=[self.level_labels[c] for c in self.LEVEL_ORDER],
+        )
+        bulk_level_combo.grid(row=3, column=0, sticky="ew", padx=8)
+
+        apply_bulk_btn = ttk.Button(
+            bulk_frame, text="Aplicar a seleccionados", command=self.apply_bulk_level
+        )
+        apply_bulk_btn.grid(row=4, column=0, sticky="ew", padx=8, pady=8)
 
     def _build_right_panel(self, parent: ttk.Frame) -> None:
         """Panel derecho: rúbrica, detalle y resultados."""
@@ -369,10 +399,15 @@ class EvaluationApp:
         if not selected:
             return
 
+        if len(selected) > 1:
+            self.selected_student_label.config(
+                text=f"Selección múltiple: {len(selected)} estudiantes"
+            )
         student_id = selected[0]
         self.current_student_id = student_id
         student_name = self.student_by_id[student_id]["name"]
-        self.selected_student_label.config(text=f"Estudiante: {student_name}")
+        if len(selected) == 1:
+            self.selected_student_label.config(text=f"Estudiante: {student_name}")
 
         # Limpia selección actual
         for entry in self.criterion_widgets:
@@ -400,6 +435,97 @@ class EvaluationApp:
                 )
 
         self.update_score()
+
+    def _build_or_update_eval_data(self, student_id: str, updates: dict) -> dict:
+        """Obtiene datos de evaluación y aplica cambios por criterio."""
+        eval_path = os.path.join(self.evals_dir, f"{student_id}.json")
+        existing_entries = {}
+
+        if os.path.isfile(eval_path):
+            try:
+                with open(eval_path, "r", encoding="utf-8") as f:
+                    data = self._normalize_structure(json.load(f))
+                for entry in data.get("evaluations", []):
+                    criterion = self._normalize_text(entry.get("criterion", ""))
+                    existing_entries[criterion] = entry.get("level", "")
+            except (json.JSONDecodeError, OSError):
+                existing_entries = {}
+
+        evaluations = []
+        for item in self.rubric:
+            criterion = item["criterion"]
+            criterion_key = self._normalize_text(criterion)
+            level = updates.get(criterion_key, existing_entries.get(criterion_key, ""))
+            evaluations.append(
+                {
+                    "criterion": criterion,
+                    "level": level,
+                    "weight": item["weight"],
+                }
+            )
+
+        total_weight = sum(item["weight"] for item in evaluations)
+        weighted_sum = sum(
+            item["weight"] * self.level_values.get(item["level"], 0) for item in evaluations
+        )
+        ratio = (weighted_sum / total_weight) if total_weight else 0.0
+        grade = 1.0 + 6.0 * ratio
+
+        return {
+            "student_id": student_id,
+            "timestamp": datetime.datetime.now().isoformat(),
+            "evaluations": evaluations,
+            "weighted_score": ratio,
+            "final_grade": grade,
+        }
+
+    def apply_bulk_level(self) -> None:
+        """Aplica un nivel a un criterio para todos los estudiantes seleccionados."""
+        selected = self.student_tree.selection()
+        if not selected:
+            messagebox.showwarning("Aviso", "Selecciona uno o más estudiantes en la tabla.")
+            return
+
+        criterion = self.bulk_criterion_var.get().strip()
+        level_code = self._selected_code(self.bulk_level_var)
+        if not criterion or level_code not in self.level_values:
+            messagebox.showwarning(
+                "Aviso", "Debes elegir criterio y nivel antes de aplicar en forma masiva."
+            )
+            return
+
+        criterion_key = self._normalize_text(criterion)
+        errors = []
+        updated = 0
+
+        for student_id in selected:
+            eval_data = self._build_or_update_eval_data(student_id, {criterion_key: level_code})
+            eval_path = os.path.join(self.evals_dir, f"{student_id}.json")
+            try:
+                with open(eval_path, "w", encoding="utf-8") as f:
+                    json.dump(eval_data, f, ensure_ascii=False, indent=2)
+                self.evaluation_index[student_id] = eval_data
+                updated += 1
+            except OSError as exc:
+                errors.append(f"{student_id}: {exc}")
+
+        self._refresh_student_table()
+        if self.current_student_id and self.student_tree.exists(self.current_student_id):
+            self.student_tree.selection_add(self.current_student_id)
+
+        if errors:
+            messagebox.showwarning(
+                "Aplicación parcial",
+                f"Se actualizaron {updated} estudiantes.\n"
+                f"Fallos: {len(errors)}\n- "
+                + "\n- ".join(errors[:5]),
+            )
+            return
+
+        messagebox.showinfo(
+            "Aplicación masiva",
+            f"Se aplicó {self.level_labels[level_code]} en '{criterion}' para {updated} estudiantes.",
+        )
 
     def _selected_code(self, var: tk.StringVar) -> str:
         """Normaliza valor de combobox a código de nivel."""
