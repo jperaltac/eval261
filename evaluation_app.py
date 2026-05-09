@@ -23,6 +23,21 @@ class EvaluationApp:
 
     LEVEL_ORDER = ("DD", "DS", "DI", "SD")
     SECTION_ORDER = ("ESCRITO", "COMPETENCIAS GENERALES", "CÓDIGO COMPUTACIONAL")
+    COLORS = {
+        "bg": "#eef2f7",
+        "surface": "#ffffff",
+        "surface_alt": "#f8fafc",
+        "text": "#1e293b",
+        "muted": "#64748b",
+        "primary": "#2563eb",
+        "primary_dark": "#1d4ed8",
+        "success_bg": "#dcfce7",
+        "success_text": "#166534",
+        "warning_bg": "#fef3c7",
+        "warning_text": "#92400e",
+        "border": "#cbd5e1",
+    }
+    FONT_FAMILY = "Segoe UI"
 
     @staticmethod
     def _normalize_text(value: str) -> str:
@@ -50,6 +65,8 @@ class EvaluationApp:
         self.master = master
         self.master.title("Evaluación de Estudiantes")
         self.master.geometry("1360x860")
+        self.master.minsize(1120, 720)
+        self._configure_styles()
         self.data_dir = os.path.abspath(data_dir)
 
         rubric_path = rubric_path or os.path.join(self.data_dir, "rubric.json")
@@ -75,9 +92,9 @@ class EvaluationApp:
 
         # Valores de logro para cálculo ponderado
         self.level_values = {
-            "DD": 1.0,   # Destacado
+            "DD": 1.0,  # Destacado
             "DS": 0.75,  # Satisfactorio
-            "DI": 0.5,   # Insuficiente
+            "DI": 0.5,  # Insuficiente
             "SD": 0.25,  # Sin Dominio
         }
 
@@ -117,33 +134,149 @@ class EvaluationApp:
                     continue
         return index
 
+    def _configure_styles(self) -> None:
+        """Aplica una apariencia moderna sin dependencias externas."""
+        colors = self.COLORS
+        self.master.configure(bg=colors["bg"])
+
+        self.style = ttk.Style(self.master)
+        if "clam" in self.style.theme_names():
+            self.style.theme_use("clam")
+
+        default_font = (self.FONT_FAMILY, 10)
+        title_font = (self.FONT_FAMILY, 13, "bold")
+        section_font = (self.FONT_FAMILY, 11, "bold")
+
+        self.style.configure(
+            ".", font=default_font, background=colors["bg"], foreground=colors["text"]
+        )
+        self.style.configure("App.TFrame", background=colors["bg"])
+        self.style.configure("Card.TFrame", background=colors["surface"], relief="flat")
+        self.style.configure(
+            "Card.TLabelframe",
+            background=colors["surface"],
+            bordercolor=colors["border"],
+            relief="solid",
+        )
+        self.style.configure(
+            "Card.TLabelframe.Label",
+            background=colors["surface"],
+            foreground=colors["text"],
+            font=section_font,
+        )
+        self.style.configure(
+            "Title.TLabel",
+            background=colors["surface"],
+            foreground=colors["text"],
+            font=title_font,
+        )
+        self.style.configure(
+            "Section.TLabel",
+            background=colors["surface"],
+            foreground=colors["text"],
+            font=section_font,
+        )
+        self.style.configure(
+            "Muted.TLabel", background=colors["surface"], foreground=colors["muted"]
+        )
+        self.style.configure(
+            "Hero.TLabel",
+            background=colors["primary"],
+            foreground="#ffffff",
+            font=(self.FONT_FAMILY, 16, "bold"),
+        )
+        self.style.configure(
+            "HeroSub.TLabel", background=colors["primary"], foreground="#dbeafe"
+        )
+        self.style.configure(
+            "Accent.TButton",
+            foreground="#ffffff",
+            background=colors["primary"],
+            bordercolor=colors["primary_dark"],
+            focusthickness=0,
+            padding=(14, 7),
+        )
+        self.style.map(
+            "Accent.TButton",
+            background=[
+                ("active", colors["primary_dark"]),
+                ("pressed", colors["primary_dark"]),
+            ],
+        )
+        self.style.configure("TButton", padding=(10, 6))
+        self.style.configure(
+            "TCombobox", padding=4, fieldbackground="#ffffff", background="#ffffff"
+        )
+        self.style.configure(
+            "Treeview",
+            rowheight=30,
+            fieldbackground="#ffffff",
+            background="#ffffff",
+            foreground=colors["text"],
+            bordercolor=colors["border"],
+        )
+        self.style.configure(
+            "Treeview.Heading",
+            background=colors["surface_alt"],
+            foreground=colors["text"],
+            font=(self.FONT_FAMILY, 10, "bold"),
+            padding=7,
+        )
+        self.style.map(
+            "Treeview",
+            background=[("selected", colors["primary"])],
+            foreground=[("selected", "#ffffff")],
+        )
+        self.style.configure("TNotebook", background=colors["surface"], borderwidth=0)
+        self.style.configure(
+            "TNotebook.Tab", padding=(14, 8), font=(self.FONT_FAMILY, 10, "bold")
+        )
+        self.style.map(
+            "TNotebook.Tab",
+            background=[("selected", "#ffffff"), ("active", colors["surface_alt"])],
+            foreground=[("selected", colors["primary"])],
+        )
+        self.style.configure("Horizontal.TPanedwindow", background=colors["bg"])
+
     def _build_ui(self) -> None:
         """Construye layout principal."""
         self.master.columnconfigure(0, weight=1)
         self.master.rowconfigure(0, weight=1)
 
-        container = ttk.Frame(self.master, padding=10)
+        container = ttk.Frame(self.master, padding=16, style="App.TFrame")
         container.grid(row=0, column=0, sticky="nsew")
         container.columnconfigure(0, weight=0)
         container.columnconfigure(1, weight=1)
-        container.rowconfigure(0, weight=1)
+        container.rowconfigure(1, weight=1)
+
+        hero = tk.Frame(container, bg=self.COLORS["primary"], highlightthickness=0)
+        hero.grid(row=0, column=0, columnspan=2, sticky="ew", pady=(0, 14))
+        hero.columnconfigure(0, weight=1)
+        ttk.Label(hero, text="Panel de evaluación", style="Hero.TLabel").grid(
+            row=0, column=0, sticky="w", padx=18, pady=(14, 2)
+        )
+        ttk.Label(
+            hero,
+            text="Rúbricas, progreso y notas en una interfaz liviana de escritorio",
+            style="HeroSub.TLabel",
+        ).grid(row=1, column=0, sticky="w", padx=18, pady=(0, 14))
 
         self._build_left_panel(container)
         self._build_right_panel(container)
 
     def _build_left_panel(self, parent: ttk.Frame) -> None:
         """Panel izquierdo: gestión de estudiantes y estado general."""
-        left = ttk.Frame(parent)
-        left.grid(row=0, column=0, sticky="nsw", padx=(0, 12))
+        left = ttk.Frame(parent, padding=12, style="Card.TFrame")
+        left.grid(row=1, column=0, sticky="nsw", padx=(0, 12))
         left.columnconfigure(0, weight=1)
 
-        ttk.Label(left, text="Gestión de estudiantes", font=("TkDefaultFont", 11, "bold")).grid(
+        ttk.Label(left, text="Gestión de estudiantes", style="Title.TLabel").grid(
             row=0, column=0, sticky="w"
         )
 
-        filter_row = ttk.Frame(left)
+        filter_row = ttk.Frame(left, style="Card.TFrame")
         filter_row.grid(row=1, column=0, sticky="ew", pady=(8, 6))
-        ttk.Label(filter_row, text="Filtro:").pack(side=tk.LEFT)
+        ttk.Label(filter_row, text="Filtro:", style="Muted.TLabel").pack(side=tk.LEFT)
         self.status_filter = tk.StringVar(value="Todos")
         filter_combo = ttk.Combobox(
             filter_row,
@@ -153,7 +286,9 @@ class EvaluationApp:
             state="readonly",
         )
         filter_combo.pack(side=tk.LEFT, padx=(6, 0))
-        filter_combo.bind("<<ComboboxSelected>>", lambda *_: self._refresh_student_table())
+        filter_combo.bind(
+            "<<ComboboxSelected>>", lambda *_: self._refresh_student_table()
+        )
 
         columns = ("student", "state", "progress", "grade")
         self.student_tree = ttk.Treeview(
@@ -174,21 +309,40 @@ class EvaluationApp:
         self.student_tree.grid(row=2, column=0, sticky="nsew")
         self.student_tree.bind("<<TreeviewSelect>>", self.on_student_select)
 
-        yscroll = ttk.Scrollbar(left, orient="vertical", command=self.student_tree.yview)
+        yscroll = ttk.Scrollbar(
+            left, orient="vertical", command=self.student_tree.yview
+        )
         self.student_tree.configure(yscrollcommand=yscroll.set)
+        self.student_tree.tag_configure(
+            "complete",
+            background=self.COLORS["success_bg"],
+            foreground=self.COLORS["success_text"],
+        )
+        self.student_tree.tag_configure(
+            "progress",
+            background=self.COLORS["warning_bg"],
+            foreground=self.COLORS["warning_text"],
+        )
+        self.student_tree.tag_configure(
+            "pending", background="#ffffff", foreground=self.COLORS["muted"]
+        )
         yscroll.grid(row=2, column=1, sticky="ns")
 
-        stats_frame = ttk.LabelFrame(left, text="Resumen")
+        stats_frame = ttk.LabelFrame(left, text="Resumen", style="Card.TLabelframe")
         stats_frame.grid(row=3, column=0, sticky="ew", pady=(8, 0))
         self.summary_label = ttk.Label(stats_frame, text="Evaluados: 0 / 0")
         self.summary_label.pack(anchor="w", padx=8, pady=6)
 
-        bulk_frame = ttk.LabelFrame(left, text="Aplicación masiva (seleccionados)")
+        bulk_frame = ttk.LabelFrame(
+            left, text="Aplicación masiva (seleccionados)", style="Card.TLabelframe"
+        )
         bulk_frame.grid(row=4, column=0, sticky="ew", pady=(8, 0))
         bulk_frame.columnconfigure(0, weight=1)
 
         criterion_values = [item["criterion"] for item in self.rubric]
-        ttk.Label(bulk_frame, text="Criterio").grid(row=0, column=0, sticky="w", padx=8, pady=(8, 2))
+        ttk.Label(bulk_frame, text="Criterio", style="Muted.TLabel").grid(
+            row=0, column=0, sticky="w", padx=8, pady=(8, 2)
+        )
         bulk_criterion_combo = ttk.Combobox(
             bulk_frame,
             textvariable=self.bulk_criterion_var,
@@ -197,7 +351,9 @@ class EvaluationApp:
         )
         bulk_criterion_combo.grid(row=1, column=0, sticky="ew", padx=8)
 
-        ttk.Label(bulk_frame, text="Nivel").grid(row=2, column=0, sticky="w", padx=8, pady=(8, 2))
+        ttk.Label(bulk_frame, text="Nivel", style="Muted.TLabel").grid(
+            row=2, column=0, sticky="w", padx=8, pady=(8, 2)
+        )
         bulk_level_combo = ttk.Combobox(
             bulk_frame,
             textvariable=self.bulk_level_var,
@@ -213,14 +369,14 @@ class EvaluationApp:
 
     def _build_right_panel(self, parent: ttk.Frame) -> None:
         """Panel derecho: rúbrica, detalle y resultados."""
-        right = ttk.Frame(parent)
-        right.grid(row=0, column=1, sticky="nsew")
+        right = ttk.Frame(parent, padding=12, style="Card.TFrame")
+        right.grid(row=1, column=1, sticky="nsew")
         right.columnconfigure(0, weight=1)
         right.rowconfigure(1, weight=1)
 
         # Encabezado del estudiante seleccionado
         self.selected_student_label = ttk.Label(
-            right, text="Selecciona un estudiante", font=("TkDefaultFont", 11, "bold")
+            right, text="Selecciona un estudiante", style="Title.TLabel"
         )
         self.selected_student_label.grid(row=0, column=0, sticky="w", pady=(0, 8))
 
@@ -228,7 +384,7 @@ class EvaluationApp:
         body.grid(row=1, column=0, sticky="nsew")
 
         # Bloque principal con pestañas de rúbrica
-        rubric_block = ttk.Frame(body)
+        rubric_block = ttk.Frame(body, style="Card.TFrame")
         rubric_block.columnconfigure(0, weight=1)
         rubric_block.rowconfigure(0, weight=1)
 
@@ -236,12 +392,30 @@ class EvaluationApp:
         self.notebook.grid(row=0, column=0, sticky="nsew")
 
         # Panel detalle del criterio seleccionado
-        detail_block = ttk.LabelFrame(body, text="Detalle del criterio")
+        detail_block = ttk.LabelFrame(
+            body, text="Detalle del criterio", style="Card.TLabelframe"
+        )
         detail_block.columnconfigure(0, weight=1)
         detail_block.rowconfigure(1, weight=1)
-        self.detail_title = ttk.Label(detail_block, text="Selecciona un criterio para ver detalles")
+        self.detail_title = ttk.Label(
+            detail_block,
+            text="Selecciona un criterio para ver detalles",
+            style="Section.TLabel",
+        )
         self.detail_title.grid(row=0, column=0, sticky="w", padx=8, pady=(8, 4))
-        self.detail_text = tk.Text(detail_block, wrap="word", width=44, height=30)
+        self.detail_text = tk.Text(
+            detail_block,
+            wrap="word",
+            width=44,
+            height=30,
+            bg=self.COLORS["surface_alt"],
+            fg=self.COLORS["text"],
+            relief="flat",
+            padx=12,
+            pady=12,
+            font=(self.FONT_FAMILY, 10),
+            insertbackground=self.COLORS["primary"],
+        )
         self.detail_text.grid(row=1, column=0, sticky="nsew", padx=8, pady=(0, 8))
         self.detail_text.configure(state="disabled")
 
@@ -249,21 +423,26 @@ class EvaluationApp:
         body.add(detail_block, weight=2)
 
         # Barra inferior de resumen
-        footer = ttk.Frame(right)
+        footer = ttk.Frame(right, style="Card.TFrame")
         footer.grid(row=2, column=0, sticky="ew", pady=(8, 0))
         footer.columnconfigure(1, weight=1)
 
         self.missing_label = ttk.Label(footer, text="Casillas pendientes: 0")
         self.missing_label.grid(row=0, column=0, sticky="w")
 
-        score_block = ttk.Frame(footer)
+        score_block = ttk.Frame(footer, style="Card.TFrame")
         score_block.grid(row=0, column=1, sticky="e")
         self.score_label = ttk.Label(score_block, text="Puntaje: 0.00")
         self.score_label.pack(side=tk.LEFT)
         self.grade_label = ttk.Label(score_block, text="Nota final: 0.0")
         self.grade_label.pack(side=tk.LEFT, padx=(10, 12))
 
-        save_btn = ttk.Button(score_block, text="Guardar evaluación", command=self.save_evaluation)
+        save_btn = ttk.Button(
+            score_block,
+            text="Guardar evaluación",
+            command=self.save_evaluation,
+            style="Accent.TButton",
+        )
         save_btn.pack(side=tk.LEFT)
 
         self._build_rubric_tabs()
@@ -294,14 +473,14 @@ class EvaluationApp:
 
         for section in ordered_sections:
             items = grouped[section]
-            frame = ttk.Frame(self.notebook, padding=8)
+            frame = ttk.Frame(self.notebook, padding=12, style="Card.TFrame")
             frame.columnconfigure(0, weight=3)
             frame.columnconfigure(1, weight=1)
             frame.columnconfigure(2, weight=3)
 
             self.notebook.add(frame, text=section)
 
-            title = ttk.Label(frame, text=section, font=("TkDefaultFont", 10, "bold"))
+            title = ttk.Label(frame, text=section, style="Section.TLabel")
             title.grid(row=0, column=0, columnspan=3, sticky="w", pady=(0, 4))
 
             ra_refs = []
@@ -313,18 +492,19 @@ class EvaluationApp:
                 frame,
                 text="RA asociados: " + ", ".join(ra_refs),
                 wraplength=740,
-                foreground="#444",
-            ).grid(
-                row=1, column=0, columnspan=3, sticky="w", pady=(0, 10)
-            )
+                style="Muted.TLabel",
+            ).grid(row=1, column=0, columnspan=3, sticky="w", pady=(0, 10))
 
             for idx, item in enumerate(items, start=2):
                 row_frame = ttk.LabelFrame(
                     frame,
                     text=f"{item['criterion']} · {item['ra_id']}",
-                    padding=6,
+                    padding=10,
+                    style="Card.TLabelframe",
                 )
-                row_frame.grid(row=idx, column=0, columnspan=3, sticky="ew", pady=(0, 6))
+                row_frame.grid(
+                    row=idx, column=0, columnspan=3, sticky="ew", pady=(0, 6)
+                )
                 row_frame.columnconfigure(1, weight=1)
 
                 ttk.Label(row_frame, text=f"Ponderación: {item['weight']:.2f}").grid(
@@ -395,11 +575,17 @@ class EvaluationApp:
 
             progress_text = f"{done}/{len(self.rubric)}"
             grade_text = f"{grade:.1f}" if grade > 0 else "-"
+            tag = (
+                "complete"
+                if state == "Completo"
+                else "progress" if state == "En curso" else "pending"
+            )
             self.student_tree.insert(
                 "",
                 tk.END,
                 iid=student_id,
                 values=(student["name"], state, progress_text, grade_text),
+                tags=(tag,),
             )
 
         self.summary_label.config(text=f"Evaluados completos: {completed} / {total}")
@@ -477,7 +663,8 @@ class EvaluationApp:
 
         total_weight = sum(item["weight"] for item in evaluations)
         weighted_sum = sum(
-            item["weight"] * self.level_values.get(item["level"], 0) for item in evaluations
+            item["weight"] * self.level_values.get(item["level"], 0)
+            for item in evaluations
         )
         ratio = (weighted_sum / total_weight) if total_weight else 0.0
         grade = 1.0 + 6.0 * ratio
@@ -494,14 +681,17 @@ class EvaluationApp:
         """Aplica un nivel a un criterio para todos los estudiantes seleccionados."""
         selected = self.student_tree.selection()
         if not selected:
-            messagebox.showwarning("Aviso", "Selecciona uno o más estudiantes en la tabla.")
+            messagebox.showwarning(
+                "Aviso", "Selecciona uno o más estudiantes en la tabla."
+            )
             return
 
         criterion = self.bulk_criterion_var.get().strip()
         level_code = self._selected_code(self.bulk_level_var)
         if not criterion or level_code not in self.level_values:
             messagebox.showwarning(
-                "Aviso", "Debes elegir criterio y nivel antes de aplicar en forma masiva."
+                "Aviso",
+                "Debes elegir criterio y nivel antes de aplicar en forma masiva.",
             )
             return
 
@@ -510,7 +700,9 @@ class EvaluationApp:
         updated = 0
 
         for student_id in selected:
-            eval_data = self._build_or_update_eval_data(student_id, {criterion_key: level_code})
+            eval_data = self._build_or_update_eval_data(
+                student_id, {criterion_key: level_code}
+            )
             eval_path = os.path.join(self.evals_dir, f"{student_id}.json")
             try:
                 with open(eval_path, "w", encoding="utf-8") as f:
@@ -521,15 +713,16 @@ class EvaluationApp:
                 errors.append(f"{student_id}: {exc}")
 
         self._refresh_student_table()
-        if self.current_student_id and self.student_tree.exists(self.current_student_id):
+        if self.current_student_id and self.student_tree.exists(
+            self.current_student_id
+        ):
             self.student_tree.selection_add(self.current_student_id)
 
         if errors:
             messagebox.showwarning(
                 "Aplicación parcial",
                 f"Se actualizaron {updated} estudiantes.\n"
-                f"Fallos: {len(errors)}\n- "
-                + "\n- ".join(errors[:5]),
+                f"Fallos: {len(errors)}\n- " + "\n- ".join(errors[:5]),
             )
             return
 
@@ -594,7 +787,9 @@ class EvaluationApp:
     def save_evaluation(self) -> None:
         """Guarda evaluación actual, advirtiendo casillas vacías."""
         if self.current_student_id is None:
-            messagebox.showwarning("Aviso", "Selecciona un estudiante antes de guardar.")
+            messagebox.showwarning(
+                "Aviso", "Selecciona un estudiante antes de guardar."
+            )
             return
 
         evaluations = []
@@ -657,7 +852,9 @@ class EvaluationApp:
             self.student_tree.selection_set(self.current_student_id)
             self.student_tree.see(self.current_student_id)
 
-        messagebox.showinfo("Guardado", f"Evaluación guardada para {self.current_student_id}")
+        messagebox.showinfo(
+            "Guardado", f"Evaluación guardada para {self.current_student_id}"
+        )
 
 
 def main():
@@ -689,7 +886,9 @@ def main():
     data_dir = os.path.abspath(args.data_dir)
     rubric_path = os.path.abspath(args.rubric_file) if args.rubric_file else None
     students_path = os.path.abspath(args.students_file) if args.students_file else None
-    evaluations_dir = os.path.abspath(args.evaluations_dir) if args.evaluations_dir else None
+    evaluations_dir = (
+        os.path.abspath(args.evaluations_dir) if args.evaluations_dir else None
+    )
 
     root = tk.Tk()
     EvaluationApp(
