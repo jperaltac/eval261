@@ -2,140 +2,140 @@
   {
     "ra_id": "A1-RAPI1",
     "competency": "ESCRITO",
-    "ra_description": "Comunica información de manera escrita en lenguaje técnico acorde a su nivel de formación, a otros miemtros de la comunidad, de forma coherente con su nivel de formación.",
-    "criterion": "LEGIBILIDAD",
+    "ra_description": "Comunica información de manera escrita en lenguaje técnico acorde a su nivel de formación, organizando un informe breve, claro y defendible sobre un problema computacional.",
+    "criterion": "LEGIBILIDAD, ORDEN Y ESTRUCTURA MANUSCRITA",
     "weight": 0.05,
     "levels": {
-      "DD": "Es legible. \n-Escribe las palabras y sus espacios correctamente.\n-Las oraciones son bien utilizadas y legibles en el documento.",
-      "DS": "Es legible. \n-Escribe las palabras correctamente.\n-En ocaciones separa las palabras.\n-Hay separación correcta de palabras.\n-Salvo pequeños detalles, las palabras son claras.",
-      "DI": "Es medianamente legible.\n- Algunos errores de sustitución, omisión o adición de letras o sílabas.\n- No separa algunas palabras. \n- Presenta algunos errores en la separación de palabras . \n-  La gran mayoría de las oraciones son comprensibles.",
-      "SD": "No se puede leer.\n- Escritura prealfabética (letras o sílabas que no forman palabras). \n- No existe separación entre palabras o es incorrecta. \n- Oraciones incomprensibles."
+      "DD": "El informe es claramente legible, ordenado y fácil de seguir.\n- Presenta títulos y subtítulos visibles.\n- Mantiene una estructura coherente entre introducción, marco teórico, metodología, resultados, análisis, conclusiones y bibliografía.\n- Las ecuaciones, figuras y comentarios están ubicados donde corresponde.",
+      "DS": "El informe es legible y mayormente ordenado.\n- La estructura general se reconoce con claridad.\n- Hay pequeños problemas de presentación, separación de secciones o ubicación de figuras, pero no impiden comprender el trabajo.",
+      "DI": "El informe es parcialmente legible u organizado.\n- Algunas secciones aparecen mezcladas, incompletas o difíciles de seguir.\n- La presentación manuscrita, las ecuaciones o las figuras dificultan la lectura en varios puntos.",
+      "SD": "El informe es difícil de leer o no presenta una organización mínima.\n- No se distinguen adecuadamente las secciones.\n- La presentación impide reconstruir el desarrollo del trabajo."
     },
     "section": "ESCRITO"
   },
   {
     "ra_id": "A1-RAPI1",
     "competency": "ESCRITO",
-    "ra_description": "Comunica información de manera escrita en lenguaje técnico acorde a su nivel de formación, a otros miemtros de la comunidad, de forma coherente con su nivel de formación.",
-    "criterion": "PROPÓSITO COMUNICATIVO",
+    "ra_description": "Comunica el objetivo, el desarrollo y las conclusiones de un estudio computacional de forma coherente, evitando copiar el enunciado o reemplazar el informe por código.",
+    "criterion": "PROPÓSITO COMUNICATIVO Y ORGANIZACIÓN DEL INFORME",
     "weight": 0.05,
     "levels": {
-      "DD": "Excelente propósito comunicativo.\n-Ideas expuestas con claridad.\n-Esta completamente organizado.",
-      "DS": "Cumple con su propósito comunicativo.\n-Se comprenden las ideas expuestas en el texto.\n- Está organizado, salvo pequeñas salvedades, y cumple la intención del tipo de texto requerido.",
-      "DI": "Cumple     parcialmente     con     su     propósito comunicativo. \n-Se comprende parcialmente el mensaje a transmitir, con algunas ideas incompletas o mezcladas.\n- Falta algún componente (ej. título, resumen, conclusiones, etc.).",
-      "SD": "No      cumple      con      su      propósito comunicativo. \n- No hay claridad en el mensaje que se espera transmitir.  Pierde secuencia o cambia de tema. \n-No  presenta  organización correspondiente a l tipo de texto requerido."
+      "DD": "El informe comunica con claridad qué problema se estudia, por qué se estudia, cómo se aborda y qué se concluye.\n- La introducción plantea el objetivo.\n- El desarrollo tiene una secuencia lógica.\n- El texto no se limita a copiar el enunciado ni a enumerar instrucciones.",
+      "DS": "El informe comunica adecuadamente el objetivo y el desarrollo general.\n- La organización es comprensible.\n- Algunas transiciones o justificaciones podrían ser más claras, pero el propósito del trabajo se entiende.",
+      "DI": "El informe comunica parcialmente el propósito del trabajo.\n- Hay secciones poco conectadas o demasiado dependientes del enunciado.\n- El objetivo, la metodología o las conclusiones aparecen de forma incompleta.",
+      "SD": "El informe no comunica claramente el propósito del trabajo.\n- Predomina una copia del enunciado, una lista de pasos o una descripción desordenada.\n- No se entiende con claridad qué se hizo ni qué se concluyó."
     },
     "section": "ESCRITO"
   },
   {
     "ra_id": "A1-RAPI1",
     "competency": "ESCRITO",
-    "ra_description": "Comunica información de manera escrita en lenguaje técnico acorde a su nivel de formación, a otros miemtros de la comunidad, de forma coherente con su nivel de formación.",
-    "criterion": "DIVERSIDAD DE VOCABULARIO",
+    "ra_description": "Utiliza lenguaje técnico, notación matemática y vocabulario físico-computacional adecuados para describir modelos, algoritmos, parámetros, resultados y limitaciones.",
+    "criterion": "PRECISIÓN DEL LENGUAJE TÉCNICO Y NOTACIÓN",
     "weight": 0.05,
     "levels": {
-      "DD": "Destacado uso de vocabulario. \n-Usa vocabulario adecuado a la situación comunicativa de forma sobresaliente",
-      "DS": "Amplio uso de vocabulario. \n- El vocabulario es rico y variado.",
-      "DI": "Uso limitado del vocabulario. \n- Uso limitado o repetitivo de palabras. \n- Algunas palabras no corresponden a la situación que se intenta comunicar.",
-      "SD": "Vocabulario escaso o no pertinente. \n-Producción de texto reducida.\n-Las  palabras  no  corresponden  a  la situación comunicativa ."
+      "DD": "Usa lenguaje técnico y notación de forma precisa y consistente.\n- Define variables, parámetros y cantidades relevantes.\n- Distingue correctamente entre modelo, algoritmo, resultado, análisis y conclusión.\n- La redacción permite defender físicamente y matemáticamente el trabajo.",
+      "DS": "Usa lenguaje técnico adecuado en la mayor parte del informe.\n- La notación es comprensible y mayormente consistente.\n- Hay imprecisiones menores, pero no alteran la interpretación central del trabajo.",
+      "DI": "Usa lenguaje técnico de forma parcial o imprecisa.\n- Algunas variables, parámetros o conceptos no se definen bien.\n- Se confunden ocasionalmente resultados con análisis o procedimiento con interpretación.",
+      "SD": "No usa lenguaje técnico ni notación de forma adecuada.\n- Las variables, ecuaciones o conceptos aparecen sin explicación suficiente.\n- La redacción impide comprender el modelo o los resultados."
     },
     "section": "ESCRITO"
   },
   {
     "ra_id": "A1-RAPI1",
     "competency": "ESCRITO",
-    "ra_description": "Comunica información de manera escrita en lenguaje técnico acorde a su nivel de formación, a otros miemtros de la comunidad, de forma coherente con su nivel de formación.",
-    "criterion": "USO DE LAS REGLAS ORTOGRÁFICAS Y SIGNOS DE PUNTUACIÓN",
+    "ra_description": "Presenta ecuaciones, figuras, tablas y referencias de manera clara, pertinente y conectada con el análisis del problema computacional.",
+    "criterion": "FIGURAS, ECUACIONES, CITAS Y REFERENCIAS",
     "weight": 0.05,
     "levels": {
-      "DD": "Uso adecuado de las reglas ortográficas. \n-Uso de mayúsculas correcto. Uso correcto de signos de puntuación\n-Destacado, en la acentuación de palabras.",
-      "DS": "Uso adecuado de las reglas ortográficas.,\n- Reglas bien utilizadas, salvo un pequeño número de errores. Bien utilziada la puntuación, salvo pocos errores\n-Uso de mayúsculas.",
-      "DI": "Uso de algunas reglas ortográficas. \n-Dos o tres errores u omisiones, en palabras poco comunes.\n- Algunos errores en la acentuación de palabras comunes. Algunos errores de puntuación",
-      "SD": "No respeta las reglas ortográficas. \n-No distingue uso de mayúsculas. \n-Errores ortográficos en las palabras comunes. Uso incorrecto de puntuación, de forma frecuente."
+      "DD": "Las figuras, ecuaciones y referencias están bien integradas al informe.\n- Cada figura tiene un propósito claro y es comentada en el texto.\n- Las ecuaciones relevantes incluyen significado de variables y parámetros.\n- Se citan adecuadamente apuntes, textos o fuentes usadas.",
+      "DS": "Las figuras, ecuaciones y referencias son adecuadas en general.\n- La mayoría de las figuras se comentan.\n- Las ecuaciones principales están presentes.\n- Puede haber omisiones menores en citas, rótulos o explicación de variables.",
+      "DI": "Las figuras, ecuaciones o referencias son incompletas o poco conectadas con el análisis.\n- Hay gráficos sin comentario suficiente.\n- Algunas ecuaciones aparecen sin explicar variables o parámetros.\n- Las referencias son escasas o poco claras.",
+      "SD": "No presenta adecuadamente figuras, ecuaciones o referencias.\n- Los gráficos son inexistentes, irrelevantes o no interpretados.\n- Las ecuaciones no se conectan con el desarrollo.\n- No se citan fuentes cuando corresponde."
     },
     "section": "ESCRITO"
   },
   {
     "ra_id": "A2-RAPI1",
     "competency": "COMPETENCIAS GENERALES",
-    "ra_description": "Integra conceptos fundamentales de matemáticas y física en la solución de problemas propios del nivel de formación en ciencias exactas.",
-    "criterion": "BÚSQUEDA Y ANÁLISIS DE BIBLIOGRAFÍA . PLANTEAMIENTO DE HIPOTESIS",
+    "ra_description": "Integra conceptos fundamentales de matemáticas, física y modelamiento computacional para formular y contextualizar problemas propios del nivel de formación.",
+    "criterion": "PLANTEAMIENTO DEL PROBLEMA Y MARCO TEÓRICO MÍNIMO",
     "weight": 0.1,
     "levels": {
-      "DD": "Realiza una búsqueda bibliográfica adecuada y extrae las principales conclusiones de los trabajos relevantes al tema. Plantea hipótesis y objetivos bien expresadas y relevantes",
-      "DS": "Realiza una búsqueda bibliográfica adecuada y extrae algunas conclusiones relevantes al tema. Plantea hipótesis y objetivos relevantes en una forma que podría ser mejorable",
-      "DI": "Extrae conclusiones de la literatura, pero son incompletas o poco relevantes  para su trabajo. Plantea hipótesis y Objetivos deficientemente expresadas y/o poco relevantes .",
-      "SD": "No extrae conclusiones. No plantea hipótesis y objetivos"
+      "DD": "Plantea claramente el problema y presenta un marco teórico breve, pertinente y suficiente.\n- Explica el modelo matemático usado.\n- Define las variables y parámetros relevantes.\n- Conecta el problema con conceptos como dinámica, caos, sensibilidad, estabilidad, colisiones o integración numérica, según corresponda.",
+      "DS": "Plantea el problema y presenta los elementos teóricos principales.\n- El modelo se entiende.\n- Las variables y parámetros más importantes están definidos.\n- Falta profundidad o conexión en algunos puntos, pero la base conceptual es adecuada.",
+      "DI": "Plantea el problema de forma parcial.\n- El marco teórico es incompleto, demasiado genérico o poco conectado con el desarrollo.\n- Algunas variables, parámetros o ideas centrales quedan sin explicar.",
+      "SD": "No plantea adecuadamente el problema ni el marco teórico.\n- El informe no permite entender el modelo estudiado.\n- Las ecuaciones o conceptos aparecen sin contexto ni interpretación."
     },
     "section": "COMPETENCIAS GENERALES"
   },
   {
     "ra_id": "A2-RAPI2",
     "competency": "COMPETENCIAS GENERALES",
-    "ra_description": "Soluciona problemas físicos teóricos y aplicados usando conceptos fundamentales propios de la Mecánica Clásica, Electrodinámica, Termodinámica y Mecánica Cuántica, de complejidad acorde al nivel de formación.",
-    "criterion": "DISEÑO Y PUESTA EN MARCHA DE LA INVESTIGACIÓN",
+    "ra_description": "Diseña y justifica una metodología computacional apropiada para estudiar numéricamente sistemas físicos o matemáticos, incluyendo parámetros, condiciones iniciales y criterios de simulación.",
+    "criterion": "METODOLOGÍA COMPUTACIONAL Y DECISIONES NUMÉRICAS",
     "weight": 0.1,
     "levels": {
-      "DD": "Diseña y pone en marcha autónomamente una investigación en una forma particularmente eficiente.",
-      "DS": "Diseña y pone en marcha autónomamente una investigación correcta",
-      "DI": "Diseña y pone en marcha la investigación autónomamente pero de manera poco adecuada",
-      "SD": "No diseña adecuadamente la investigación, y no es capaz de ponerla en marcha, desarrollar y explicar con claridad"
+      "DD": "Describe y justifica claramente la metodología computacional.\n- Explica el algoritmo o integrador utilizado.\n- Justifica parámetros, condiciones iniciales, número de iteraciones, descarte de transitorios, paso temporal o criterios de colisión, según corresponda.\n- Distingue entre describir el procedimiento y copiar código.",
+      "DS": "Describe adecuadamente la metodología computacional.\n- El algoritmo y las decisiones principales se entienden.\n- Algunas elecciones numéricas podrían estar mejor justificadas, pero el procedimiento es reproducible en lo esencial.",
+      "DI": "Describe la metodología de forma incompleta.\n- Faltan detalles relevantes sobre parámetros, condiciones iniciales, paso temporal, transitorios o criterios de simulación.\n- El procedimiento no siempre es reproducible a partir del informe.",
+      "SD": "No describe una metodología computacional defendible.\n- El informe no explica cómo se resolvió el problema.\n- Las decisiones numéricas son inexistentes, arbitrarias o no verificables."
     },
     "section": "COMPETENCIAS GENERALES"
   },
   {
     "ra_id": "A3-RAPI2",
     "competency": "COMPETENCIAS GENERALES",
-    "ra_description": "Comunica los resultados de una investigación científica coherente con la disciplina y el nivel de formación y su asociación con fenómenos físicos.",
-    "criterion": "DISCUSIÓN DE RESULTADOS RESULTADOS Y CONCLUSIONES DEL TRABAJO",
+    "ra_description": "Comunica, interpreta y discute resultados computacionales de forma coherente con la disciplina, distinguiendo evidencia, análisis, conclusiones y limitaciones.",
+    "criterion": "ANÁLISIS, DISCUSIÓN Y CONCLUSIONES",
     "weight": 0.1,
     "levels": {
-      "DD": "Realiza una discusión adecuada y relevante",
-      "DS": "Realiza una discusión adecuada dejando algunos puntos incompletos",
-      "DI": "Discute los resultados de forma superficial",
-      "SD": "No hace una discusión de los resultados"
+      "DD": "Analiza e interpreta los resultados de forma clara y físicamente defendible.\n- No se limita a mostrar gráficos.\n- Compara casos, parámetros o condiciones iniciales cuando corresponde.\n- Discute sensibilidad, estabilidad, transitorios, estructura de atractores, trayectorias, colisiones o limitaciones, según el problema elegido.\n- Las conclusiones responden al objetivo planteado.",
+      "DS": "Analiza los resultados principales de forma adecuada.\n- Hay interpretación de las figuras y comparación básica de casos.\n- Las conclusiones son coherentes, aunque podrían profundizar más en limitaciones o significado físico-matemático.",
+      "DI": "Presenta análisis parcial o superficial.\n- Hay resultados correctos, pero la interpretación es breve, incompleta o poco conectada con la teoría.\n- Las conclusiones repiten resultados sin explicar suficientemente su significado.",
+      "SD": "No presenta análisis ni conclusiones defendibles.\n- Predomina la presentación de gráficos o datos sin interpretación.\n- No se discuten resultados, limitaciones ni significado físico-matemático."
     },
     "section": "COMPETENCIAS GENERALES"
   },
   {
     "ra_id": "A2-RAPI3",
     "competency": "CÓDIGO COMPUTACIONAL",
-    "ra_description": "Aplica herramientas de programación, modelamiento computacional y simulación, para comprender y resolver fenómenos físicos, de complejidad acorde al nivel de formación.",
-    "criterion": "DISEÑO DEL CÓDIGO",
+    "ra_description": "Aplica herramientas de programación, modelamiento computacional y simulación para implementar correctamente modelos físicos o matemáticos del curso.",
+    "criterion": "DISEÑO DEL CÓDIGO E IMPLEMENTACIÓN DEL MODELO",
     "weight": 0.15,
     "levels": {
-      "DD": "Diseña un código de forma eficiente, ordenada, funcional, e inlcuye de forma adecuada librerías externas.",
-      "DS": "Diseña un código utilizable, pero falto de funcionalidad y uso de librerias.",
-      "DI": "Diseña un código parcialmente utilizable, que no cumple su labor para el desarrollo de la investigación.",
-      "SD": "No diseña un código."
+      "DD": "El código implementa correctamente el modelo y está diseñado de forma clara y modular.\n- Usa funciones apropiadas para el mapa, sistema de ecuaciones, integrador o reglas de reflexión.\n- Separa modelo, simulación, análisis y visualización cuando corresponde.\n- Permite modificar parámetros y condiciones iniciales sin reescribir todo el programa.",
+      "DS": "El código implementa el modelo de forma correcta en lo esencial.\n- La estructura es comprensible.\n- Puede tener poca modularidad o repetición, pero permite obtener los resultados principales.",
+      "DI": "El código implementa el modelo de forma parcial.\n- Hay errores conceptuales o estructurales que afectan algunos resultados.\n- La organización dificulta modificar parámetros, repetir simulaciones o verificar partes del procedimiento.",
+      "SD": "El código no implementa adecuadamente el modelo solicitado.\n- Presenta errores graves de formulación o programación.\n- No permite estudiar el problema de manera confiable."
     },
     "section": "CÓDIGO COMPUTACIONAL"
   },
   {
     "ra_id": "A2-RAPI3",
     "competency": "CÓDIGO COMPUTACIONAL",
-    "ra_description": "Aplica herramientas de programación, modelamiento computacional y simulación, para comprender y resolver fenómenos físicos, de complejidad acorde al nivel de formación.",
-    "criterion": "LEGIBILIDAD DEL CÓDIGO",
+    "ra_description": "Desarrolla código legible, documentado y reproducible, permitiendo reconstruir los resultados entregados en el informe.",
+    "criterion": "LEGIBILIDAD, REPRODUCIBILIDAD Y ENTREGA DEL CÓDIGO",
     "weight": 0.15,
     "levels": {
-      "DD": "El código se encuentra adecuadamente documentado mediante comentarios y/o documentación adicional",
-      "DS": "El código presenta una documentación suficiente, con secciones claves sin documentar.",
-      "DI": "El código posee una documentación incompleta",
-      "SD": "El código no posee documentación ni comentarios."
+      "DD": "El código es claro, legible y reproducible.\n- Usa nombres de variables razonables.\n- Incluye comentarios útiles sin sobrecargar.\n- Indica o permite reconocer parámetros, condiciones iniciales y salidas.\n- Los archivos entregados permiten reproducir las figuras y resultados del informe.",
+      "DS": "El código es comprensible y mayormente reproducible.\n- Tiene una organización suficiente.\n- Los comentarios o instrucciones podrían mejorar, pero es posible reconstruir los resultados principales.",
+      "DI": "El código es parcialmente legible o reproducible.\n- Faltan comentarios, instrucciones, archivos o parámetros relevantes.\n- Cuesta relacionar el código con las figuras o resultados del informe.",
+      "SD": "El código no es legible ni reproducible.\n- No se entregan archivos suficientes o el código está desordenado.\n- No permite reconstruir los resultados presentados."
     },
     "section": "CÓDIGO COMPUTACIONAL"
   },
   {
     "ra_id": "A2-RAPI2",
     "competency": "CÓDIGO COMPUTACIONAL",
-    "ra_description": "Soluciona problemas físicos teóricos y aplicados usando conceptos fundamentales propios de la Mecánica Clásica, Electrodinámica, Termodinámica y Mecánica Cuántica, de complejidad acorde al nivel de formación.",
-    "criterion": "FUNCIONAMIENTO DEL CÓDIGO",
+    "ra_description": "Valida y utiliza simulaciones computacionales para explorar el comportamiento de sistemas físicos o matemáticos, evaluando su funcionamiento, estabilidad y alcance.",
+    "criterion": "FUNCIONAMIENTO, VALIDACIÓN Y EXPLORACIÓN COMPUTACIONAL",
     "weight": 0.2,
     "levels": {
-      "DD": "El código cumple cabalmente los requerimientos para la resolución de la investigación.",
-      "DS": "El código cumple sus requerimientos de forma parcial, requiere modificaciones profundas para cada uso.",
-      "DI": "El código cumple muy pocas de las funciones o requerimientos solicitados en su diseño.",
-      "SD": "El código no funciona."
+      "DD": "El código funciona correctamente y se usa para una exploración computacional significativa.\n- Produce resultados consistentes con el modelo.\n- Incluye comparaciones de parámetros, condiciones iniciales, pasos temporales, transitorios, sensibilidad o geometrías, según corresponda.\n- Presenta evidencia de validación básica, como conservación de rapidez, comparación de métodos, estabilidad numérica o comportamiento esperado.",
+      "DS": "El código funciona y permite obtener los resultados principales.\n- Hay exploración razonable de casos.\n- La validación o discusión de estabilidad es básica, pero suficiente para sostener el análisis.",
+      "DI": "El código funciona solo parcialmente o la exploración es limitada.\n- Faltan comparaciones importantes pedidas por el problema.\n- Hay resultados dudosos sin suficiente validación o discusión.",
+      "SD": "El código no funciona de manera útil o no permite estudiar el problema.\n- No produce resultados confiables.\n- No hay exploración computacional ni validación mínima."
     },
     "section": "CÓDIGO COMPUTACIONAL"
   }
